@@ -24,7 +24,8 @@ How to clone the project
 Each member starts by cloning the repository:
 
 git clone https://github.com/your-username/Plateforme-de-Covoiturage-etudiant.git
-cd Plateforme-de-Covoiturage-etudiant
+
+- cd Plateforme-de-Covoiturage-etudiant
 
 How to switch to your branch
 
