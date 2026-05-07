@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publier un trajet</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/publish.css" />
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <div class="publish-container">
+      <h1>🚗 Publier un trajet</h1>
+
+      <form id="tripForm">
+        <input
+          type="text"
+          id="from"
+          placeholder="Départ (ex: Tunis)"
+          required
+        />
+        <input
+          type="text"
+          id="to"
+          placeholder="Destination (ex: Ariana)"
+          required
+        />
+        <input
+          type="number"
+          id="seats"
+          placeholder="Places disponibles"
+          required
+        />
+
+        <button type="submit">Publier</button>
+      </form>
+
+      <p id="msg"></p>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/trips.js"></script>
+  </body>
+</html>
