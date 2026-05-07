@@ -1,0 +1,47 @@
+.dashboard {
+  padding: 30px;
+}
+
+/* Welcome */
+.welcome-box {
+  margin-bottom: 30px;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  flex: 1;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f3f4f6;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Activity */
+.activity {
+  margin-top: 40px;
+}
+
+.empty {
+  margin-top: 10px;
+  padding: 20px;
+  background: #f9fafb;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+}
+.dashboard,
+.auth-container,
+.container {
+  flex: 1;
+}
