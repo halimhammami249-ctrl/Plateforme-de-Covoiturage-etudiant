@@ -29,9 +29,9 @@ function displayTrips(list) {
     div.className = 'trip-card';
 
     div.innerHTML = `
-      <h3>🚗 ${trip.from} → ${trip.to}</h3>
-      <p>👤 Conducteur: ${trip.driver}</p>
-      <p>🪑 Places: ${isFull ? 'COMPLET ❌' : trip.seats}</p>
+      <h3> ${trip.from} → ${trip.to}</h3>
+      <p> Conducteur: ${trip.driver}</p>
+      <p> Places: ${isFull ? 'COMPLET ' : trip.seats}</p>
 
       <div class="actions">
         <a href="trip-details.html?id=${trip.id}">
@@ -78,11 +78,11 @@ function joinTrip(id) {
 
     saveTrips();
 
-    alert('Tu as rejoint le trajet 🚗');
+    alert('Tu as rejoint le trajet ');
 
     displayTrips(trips);
   } else {
-    alert('Trajet complet ❌');
+    alert('Trajet complet ');
   }
 }
 
@@ -110,7 +110,7 @@ if (form) {
     trips.push(newTrip);
     saveTrips();
 
-    document.getElementById('msg').innerText = 'Trajet publié avec succès ✅';
+    document.getElementById('msg').innerText = 'Trajet publié avec succès ';
 
     form.reset();
   });
