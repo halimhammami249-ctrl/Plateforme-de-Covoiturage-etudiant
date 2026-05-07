@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rechercher un trajet</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/search.css" />
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <div class="search-container">
+      <h1>🔍 Rechercher un trajet</h1>
+
+      <!-- FILTER -->
+      <div class="filters">
+        <input type="text" id="from" placeholder="Départ (ex: Tunis)" />
+        <input type="text" id="to" placeholder="Destination (ex: Ariana)" />
+        <button onclick="searchTrips()">Rechercher</button>
+      </div>
+
+      <!-- RESULTS -->
+      <div id="results" class="results"></div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/trips.js"></script>
+  </body>
+</html>
