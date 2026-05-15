@@ -9,5 +9,20 @@ class Signalement {
     public $dateSignalement;
     public $statut;
 
+    public function creerSignalement() {
+        echo "Signalement créé";
+    }
+
+    public function traiterSignalement() {
+        echo "Signalement traité";
+    }
+
+    public function supprimerSignalement() {
+        echo "Signalement supprimé";
+    }
+
+    public function afficherSignalement() {
+        echo "Affichage du signalement";
+    }
 }
 ?>
