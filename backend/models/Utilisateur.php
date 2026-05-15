@@ -13,9 +13,24 @@ class Utilisateur {
     public $vehicule;
     public $dateInscription;
 
-    public function inscrire() {
-        echo "Utilisateur inscrit";
-    }
+    public function inscrire($pdo) {
+
+    $sql = "INSERT INTO Utilisateurs
+    (nom, prenom, email, motDePasse)
+
+    VALUES
+
+    (?, ?, ?, ?)";
+
+    $stmt = $pdo->prepare($sql);
+
+    return $stmt->execute([
+        $this->nom,
+        $this->prenom,
+        $this->email,
+        $this->motDePasse
+    ]);
+}
 
     public function connecter() {
         echo "Utilisateur connecté";

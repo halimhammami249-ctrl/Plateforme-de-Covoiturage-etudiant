@@ -14,38 +14,55 @@
       <div class="auth-box">
         <h1>Créer un compte</h1>
 
-        <form>
+        <form
+          action="../../backend/controllers/RegisterController.php"
+          method="POST"
+        >
           <div class="input-group">
             <label>Nom complet</label>
-            <input type="text" placeholder="Entrer votre nom" />
+            <input type="text" name="nom" placeholder="Entrer votre nom" />
           </div>
-
+          <div class="input-group">
+            <label>Prénom</label>
+            <input
+              type="text"
+              name="prenom"
+              placeholder="Entrer votre prénom"
+            />
+          </div>
           <div class="input-group">
             <label>Email</label>
-            <input type="email" placeholder="Entrer votre email" />
+            <input type="email" name="email" placeholder="Entrer votre email" />
           </div>
 
           <div class="input-group">
             <label>Téléphone</label>
-            <input type="text" placeholder="Entrer votre numéro" />
+            <input
+              type="text"
+              name="telephone"
+              placeholder="Entrer votre numéro"
+            />
           </div>
 
           <div class="input-group">
             <label>Mot de passe</label>
-            <input type="password" placeholder="Créer un mot de passe" />
+            <input
+              type="password"
+              name="motDePasse"
+              placeholder="Créer un mot de passe"
+            />
           </div>
 
           <div class="input-group">
             <label>Confirmer le mot de passe</label>
-            <input type="password" placeholder="Confirmer le mot de passe" />
+            <input
+              type="password"
+              name="confirmMotDePasse"
+              placeholder="Confirmer le mot de passe"
+            />
           </div>
 
           <button type="submit">Créer un compte</button>
-
-          <p class="auth-link">
-            Vous avez déjà un compte ?
-            <a href="login.html">Se connecter</a>
-          </p>
         </form>
       </div>
     </div>
