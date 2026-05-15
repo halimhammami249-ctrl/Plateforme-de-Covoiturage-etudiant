@@ -8,5 +8,16 @@ class Message {
     public $contenu;
     public $dateEnvoi;
 
+    public function envoyerMessage() {
+        echo "Message envoyé";
+    }
+
+    public function supprimerMessage() {
+        echo "Message supprimé";
+    }
+
+    public function afficherMessages() {
+        echo "Affichage des messages";
+    }
 }
 ?>
