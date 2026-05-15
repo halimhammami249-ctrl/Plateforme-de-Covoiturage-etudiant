@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Trajet</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="map.css" />
+  
+</head>
+<body>
+
+<header>
+  <h1>🚗 Car Trajet </h1>
+  <p>follow ur car</p>
+</header>
+
+<div id="map"></div>
+
+<div class="panel">
+  <button class="primary" id="btnPlay" onclick="startAnimation()">▶ Start drive</button>
+  <button id="btnPause" onclick="togglePause()" disabled>⏸ Pause</button>
+  <button onclick="resetAnimation()">↺ Reset</button>
+  <div class="info-pills">
+    <div class="pill">Distance: <span id="distVal">—</span></div>
+    <div class="pill">Duration: <span id="durVal">—</span></div>
+    <div class="pill">Progress: <span id="progVal">0%</span></div>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="map.js"></script>
+
+</body>
+</html>
