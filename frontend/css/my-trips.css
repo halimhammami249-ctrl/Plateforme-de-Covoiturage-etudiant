@@ -1,0 +1,23 @@
+.my-trips {
+  flex: 1;
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+.trip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.trip-card {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
