@@ -1,0 +1,109 @@
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #0f1117;
+      color: #e8e8e8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    header {
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 1.25rem;
+    }
+
+    header h1 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    header p {
+      font-size: 13px;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    #map {
+      width: 100%;
+      max-width: 900px;
+      height: 520px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+    }
+
+    .panel {
+      width: 100%;
+      max-width: 900px;
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 20px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+      border: 1px solid #333;
+      background: #1c1c1c;
+      color: #e8e8e8;
+    }
+
+    button:hover { background: #262626; border-color: #444; }
+    button:active { transform: scale(0.97); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    button.primary {
+      background: #185FA5;
+      border-color: #1a6bbf;
+      color: #fff;
+    }
+    button.primary:hover { background: #1a6bbf; }
+
+    .info-pills {
+      display: flex;
+      gap: 8px;
+      margin-left: auto;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: #1c1c1c;
+      border: 1px solid #2e2e2e;
+      color: #aaa;
+    }
+
+    .pill span { color: #e8e8e8; font-weight: 500; }
+
+    #status {
+      font-size: 12px;
+      color: #666;
+      margin-top: 8px;
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+      min-height: 18px;
+    }
+
+    .leaflet-container { background: #1a1a2e; }
