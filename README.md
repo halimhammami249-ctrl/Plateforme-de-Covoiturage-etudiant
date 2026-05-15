@@ -35,3 +35,5 @@ git checkout member1
 (Replace member1 with your own branch(name))
 
 ## Fonctionnalités principales
+
+Import schema.sql locally (data base definition)
