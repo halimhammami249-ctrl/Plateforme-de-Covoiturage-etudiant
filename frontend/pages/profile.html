@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+  </head>
+
+  <body>
+    <div id="navbar"></div>
+
+    <div class="profile-container">
+      <h1>Mon Profil</h1>
+
+      <!-- USER INFO -->
+      <div class="profile-card">
+        <h2 id="name">Nom</h2>
+        <p id="email">Email</p>
+      </div>
+
+      <!-- CAPABILITIES -->
+      <div class="profile-card">
+        <h3>Capabilités</h3>
+        <ul>
+          <li>✔ Peut proposer des trajets</li>
+          <li>✔ Peut rejoindre des trajets</li>
+        </ul>
+      </div>
+
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat">
+          <h3>Trajets proposés</h3>
+          <p>0</p>
+        </div>
+
+        <div class="stat">
+          <h3>Trajets rejoints</h3>
+          <p>0</p>
+        </div>
+      </div>
+
+      <!-- EDIT FORM (UI ONLY) -->
+      <div class="profile-card">
+        <h3>Modifier profil</h3>
+
+        <input type="text" id="newName" placeholder="Nouveau nom" />
+        <input type="email" id="newEmail" placeholder="Nouvel email" />
+
+        <button onclick="updateProfile()">Sauvegarder</button>
+      </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/profile.js"></script>
+  </body>
+</html>
