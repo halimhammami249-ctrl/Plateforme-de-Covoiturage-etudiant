@@ -16,11 +16,11 @@ class Utilisateur {
     public function inscrire($pdo) {
 
     $sql = "INSERT INTO Utilisateurs
-    (nom, prenom, email, motDePasse)
+    (nom, prenom, email, motDePasse, telephone)
 
     VALUES
 
-    (?, ?, ?, ?)";
+    (?, ?, ?, ?, ?)";
 
     $stmt = $pdo->prepare($sql);
 
@@ -28,7 +28,8 @@ class Utilisateur {
         $this->nom,
         $this->prenom,
         $this->email,
-        $this->motDePasse
+        $this->motDePasse,
+        $this->telephone,
     ]);
 }
 
