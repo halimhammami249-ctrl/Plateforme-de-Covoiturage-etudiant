@@ -16,11 +16,11 @@ class Utilisateur {
     public function inscrire($pdo) {
 
     $sql = "INSERT INTO Utilisateurs
-    (nom, prenom, email, motDePasse)
+    (nom, prenom, email, motDePasse, telephone)
 
     VALUES
 
-    (?, ?, ?, ?)";
+    (?, ?, ?, ?, ?)";
 
     $stmt = $pdo->prepare($sql);
 
@@ -28,17 +28,56 @@ class Utilisateur {
         $this->nom,
         $this->prenom,
         $this->email,
-        $this->motDePasse
+        $this->motDePasse,
+        $this->telephone,
     ]);
 }
 
-    public function connecter() {
-        echo "Utilisateur connecté";
+   public function connecter($pdo) {
+
+    session_start();
+
+    $sql = "SELECT * FROM Utilisateurs WHERE email = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$this->email]);
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$user) {
+        return "Email incorrect";
     }
 
-    public function deconnecter() {
-        echo "Utilisateur déconnecté";
+    if (!password_verify($this->motDePasse, $user['motDePasse'])) {
+        return "Mot de passe incorrect";
     }
+
+    // Store session data
+    $_SESSION['user'] = [
+        'id' => $user['id'],
+        'nom' => $user['nom'],
+        'prenom' => $user['prenom'],
+        'email' => $user['email']
+    ];
+
+    // Optional: update dateSession
+    $update = "UPDATE Utilisateurs SET dateSession = ? WHERE id = ?";
+    $stmt = $pdo->prepare($update);
+    $stmt->execute([date('Y-m-d H:i:s'), $user['id']]);
+
+    return "Connexion réussie";
+}
+
+
+
+ public function deconnecter() {
+
+    session_start();
+
+    session_unset();
+    session_destroy();
+
+    return "Déconnexion réussie";
+}
 
     public function modifierProfil() {
         echo "Profil modifié";
