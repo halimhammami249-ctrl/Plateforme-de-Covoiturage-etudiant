@@ -8,8 +8,20 @@ class Message {
     public $contenu;
     public $dateEnvoi;
 
-    public function envoyerMessage() {
-        echo "Message envoyé";
+     public function envoyer($pdo) {
+
+        $sql = "INSERT INTO Message
+        (expediteur_id, recepteur_id, contenu, dateEnvoi)
+
+        VALUES (?, ?, ?, NOW())";
+
+        $stmt = $pdo->prepare($sql);
+
+        return $stmt->execute([
+            $this->expediteur_id,
+            $this->recepteur_id,
+            $this->contenu
+        ]);
     }
 
     public function supprimerMessage() {
