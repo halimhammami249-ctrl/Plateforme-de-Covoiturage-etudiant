@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/admin-theme.css" />
+    <link rel="stylesheet" href="../css/admin-dashboard.css" />
+    <link rel="stylesheet" href="../css/admin-login.css" />
+  </head>
+  <body class="admin-app admin-login-page">
+    <div class="admin-login-card">
+      <div class="admin-login-card__icon">⚡</div>
+      <h1>Espace Administrateur</h1>
+      <p>Accès réservé aux modérateurs de la plateforme</p>
+
+      <form id="adminLoginForm">
+        <div class="admin-login-field">
+          <label for="adminEmail">Email admin</label>
+          <input
+            type="email"
+            id="adminEmail"
+            placeholder="admin@covoiturage.tn"
+            value="admin@covoiturage.tn"
+            required
+          />
+        </div>
+        <div class="admin-login-field">
+          <label for="adminPassword">Mot de passe</label>
+          <input
+            type="password"
+            id="adminPassword"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+        <p class="admin-login-hint">Démo : admin@covoiturage.tn / admin123</p>
+        <button type="submit" class="admin-login-submit">Se connecter</button>
+        <button type="button" class="admin-login-demo" id="demoAccessBtn">
+          Voir le dashboard sans connexion
+        </button>
+      </form>
+
+      <a href="admin-dashboard.html" class="admin-login-back">→ Dashboard admin (si connecté)</a>
+      <a href="dashboard.html" class="admin-login-back">← Retour au site étudiant</a>
+    </div>
+
+    <script src="../js/admin-login.js"></script>
+  </body>
+</html>
