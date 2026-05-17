@@ -6,8 +6,11 @@
     <title>Publier un trajet</title>
 
     <!-- Ajout Google Fonts pour le design -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/publish.css" />
@@ -23,22 +26,37 @@
     <div class="publish-container">
       <h1>Publier un trajet</h1>
 
-      <form id="tripForm">
+      <form
+        id="tripForm"
+        action="../../backend/controllers/TrajetController.php"
+        method="POST"
+      >
         <input
           type="text"
-          id="from"
+          name="lieuDepart"
           placeholder="Départ (ex: Tunis)"
           required
         />
+
         <input
           type="text"
-          id="to"
+          name="destination"
           placeholder="Destination (ex: Ariana)"
           required
         />
+
+        <input type="datetime-local" name="dateHeure" required />
+
         <input
           type="number"
-          id="seats"
+          name="prixParPlace"
+          placeholder="Prix par place"
+          required
+        />
+
+        <input
+          type="number"
+          name="nombrePlaces"
           placeholder="Places disponibles"
           required
         />
@@ -54,5 +72,6 @@
     <script src="../js/ui-enhancements.js"></script>
     <script src="../js/components.js"></script>
     <script src="../js/trips.js"></script>
+    <script src="../js/auth.js"></script>
   </body>
 </html>
