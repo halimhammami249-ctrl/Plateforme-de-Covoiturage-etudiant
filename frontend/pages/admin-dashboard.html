@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administration — Covoiturage Étudiant</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../css/admin-theme.css" />
+    <link rel="stylesheet" href="../css/admin-dashboard.css" />
+  </head>
+
+  <body class="admin-app">
+    <div class="admin-layout">
+      <div id="adminSidebarHost"></div>
+
+      <main class="admin-main">
+        <header class="admin-header">
+          <div>
+            <h1 id="adminPageTitle">Vue d'ensemble</h1>
+            <p id="adminPageDesc">Statistiques et activité de la plateforme</p>
+          </div>
+          <div class="admin-header__meta">
+            <span class="admin-pill">● En ligne</span>
+            <div class="admin-avatar" id="adminAvatar" title="Administrateur">AD</div>
+          </div>
+        </header>
+
+        <!-- VUE D'ENSEMBLE -->
+        <section class="admin-section is-visible" id="section-overview" data-section="overview">
+          <div class="admin-stats" id="statsGrid">
+            <article class="admin-stat-card admin-stat-card--users">
+              <p class="admin-stat-label">Utilisateurs</p>
+              <p class="admin-stat-value" id="statUsers">0</p>
+              <p class="admin-stat-trend" id="trendUsers">+12% ce mois</p>
+            </article>
+            <article class="admin-stat-card admin-stat-card--trips">
+              <p class="admin-stat-label">Trajets actifs</p>
+              <p class="admin-stat-value" id="statTrips">0</p>
+              <p class="admin-stat-trend" id="trendTrips">+8% cette semaine</p>
+            </article>
+            <article class="admin-stat-card admin-stat-card--reports">
+              <p class="admin-stat-label">Signalements en attente</p>
+              <p class="admin-stat-value" id="statReports">0</p>
+              <p class="admin-stat-trend is-down" id="trendReports">À traiter</p>
+            </article>
+            <article class="admin-stat-card admin-stat-card--revenue">
+              <p class="admin-stat-label">Réservations</p>
+              <p class="admin-stat-value" id="statReservations">0</p>
+              <p class="admin-stat-trend" id="trendReservations">Total plateforme</p>
+            </article>
+          </div>
+
+          <article class="admin-chart-card">
+            <h3>Activité des 7 derniers jours</h3>
+            <div class="admin-bars" id="activityChart"></div>
+          </article>
+
+          <article class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Derniers signalements</h2>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Utilisateur</th>
+                    <th>Motif</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                  </tr>
+                </thead>
+                <tbody id="recentReportsBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- UTILISATEURS -->
+        <section class="admin-section" id="section-users" data-section="users">
+          <article class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Gestion des utilisateurs</h2>
+              <input
+                type="search"
+                class="admin-search"
+                id="searchUsers"
+                placeholder="Rechercher nom, email..."
+              />
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Inscription</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="usersTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- TRAJETS -->
+        <section class="admin-section" id="section-trips" data-section="trips">
+          <article class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Gestion des trajets</h2>
+              <input
+                type="search"
+                class="admin-search"
+                id="searchTrips"
+                placeholder="Rechercher départ, destination..."
+              />
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Trajet</th>
+                    <th>Conducteur</th>
+                    <th>Places</th>
+                    <th>Prix</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="tripsTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+
+        <!-- SIGNALEMENTS -->
+        <section class="admin-section" id="section-reports" data-section="reports">
+          <article class="admin-panel">
+            <div class="admin-panel__head">
+              <h2>Gestion des signalements</h2>
+              <input
+                type="search"
+                class="admin-search"
+                id="searchReports"
+                placeholder="Rechercher motif, utilisateur..."
+              />
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Utilisateur</th>
+                    <th>Motif</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="reportsTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <button type="button" class="admin-menu-toggle" id="adminMenuToggle" aria-label="Menu">☰</button>
+
+    <!-- Modal confirmation -->
+    <div class="admin-modal-overlay" id="confirmModal">
+      <div class="admin-modal" role="dialog" aria-modal="true">
+        <h3 id="confirmTitle">Confirmer</h3>
+        <p id="confirmMessage">Êtes-vous sûr ?</p>
+        <div class="admin-modal__actions">
+          <button type="button" class="admin-btn admin-btn--ghost" id="confirmCancel">Annuler</button>
+          <button type="button" class="admin-btn admin-btn--danger" id="confirmOk">Confirmer</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-toast" id="adminToast" role="status"></div>
+
+    <script src="../js/admin-dashboard.js"></script>
+  </body>
+</html>
