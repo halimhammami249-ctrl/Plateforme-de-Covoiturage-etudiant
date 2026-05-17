@@ -10,33 +10,104 @@ class Reservation {
     public $nombrePlaces;
 
     public function reserver($pdo) {
+$check = "SELECT placesDisponibles
+          FROM Trajet
+          WHERE id = ?";
 
-        $sql = "INSERT INTO Reservation
-        (idUtilisateur, idTrajet, dateReservation, statut, nombrePlaces)
+$stmt = $pdo->prepare($check);
 
-        VALUES (?, ?, NOW(), ?, ?)";
+$stmt->execute([$this->idTrajet]);
 
-        $stmt = $pdo->prepare($sql);
+$trajet = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $stmt->execute([
-            $this->idUtilisateur,
-            $this->idTrajet,
-            $this->statut,
-            $this->nombrePlaces
-        ]);
-    }
+if ($trajet['placesDisponibles']
+    < $this->nombrePlaces) {
 
-    public function annulerReservation($pdo) {
+    return false;
+}
+    // INSERT RESERVATION
+    $sql = "INSERT INTO Reservation
+    (idUtilisateur, idTrajet,
+    dateReservation, statut, nombrePlaces)
 
-    $sql = "DELETE FROM Reservation
-    WHERE id = ?";
+    VALUES (?, ?, NOW(), ?, ?)";
 
     $stmt = $pdo->prepare($sql);
 
-    return $stmt->execute([
-        $this->id
+    $success = $stmt->execute([
+        $this->idUtilisateur,
+        $this->idTrajet,
+        $this->statut,
+        $this->nombrePlaces
     ]);
+
+    if ($success) {
+
+        // UPDATE AVAILABLE SEATS
+        $update = "UPDATE Trajet
+
+                   SET placesDisponibles =
+                   placesDisponibles - ?
+
+                   WHERE id = ?";
+
+        $stmt = $pdo->prepare($update);
+
+        $stmt->execute([
+            $this->nombrePlaces,
+            $this->idTrajet
+        ]);
     }
+
+    return $success;
+}
+
+    public function annulerReservation($pdo) {
+
+    // GET RESERVATION INFO
+    $sql = "SELECT *
+            FROM Reservation
+            WHERE id = ?";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->execute([$this->id]);
+
+    $reservation =
+        $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$reservation) {
+        return false;
+    }
+
+    // DELETE RESERVATION
+    $delete = "DELETE FROM Reservation
+               WHERE id = ?";
+
+    $stmt = $pdo->prepare($delete);
+
+    $success = $stmt->execute([$this->id]);
+
+    if ($success) {
+
+        // RESTORE SEATS
+        $update = "UPDATE Trajet
+
+                   SET placesDisponibles =
+                   placesDisponibles + ?
+
+                   WHERE id = ?";
+
+        $stmt = $pdo->prepare($update);
+
+        $stmt->execute([
+            $reservation['nombrePlaces'],
+            $reservation['idTrajet']
+        ]);
+    }
+
+    return $success;
+}
 
 
     public function confirmerReservation() {
