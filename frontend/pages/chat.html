@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Chat</title>
+  </head>
+
+  <body>
+    <h1>Messagerie</h1>
+
+    <div id="messages"></div>
+
+    <form
+      action="../../backend/controllers/MessageController.php"
+      method="POST"
+    >
+      <input type="hidden" name="expediteur_id" value="1" />
+      <input type="hidden" name="recepteur_id" value="2" />
+
+      <input type="text" name="contenu" placeholder="Votre message" />
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </body>
+</html>
