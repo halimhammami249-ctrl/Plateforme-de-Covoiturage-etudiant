@@ -26,9 +26,18 @@ class Reservation {
         ]);
     }
 
-    public function annulerReservation() {
-        echo "Réservation annulée";
+    public function annulerReservation($pdo) {
+
+    $sql = "DELETE FROM Reservation
+    WHERE id = ?";
+
+    $stmt = $pdo->prepare($sql);
+
+    return $stmt->execute([
+        $this->id
+    ]);
     }
+
 
     public function confirmerReservation() {
         echo "Réservation confirmée";

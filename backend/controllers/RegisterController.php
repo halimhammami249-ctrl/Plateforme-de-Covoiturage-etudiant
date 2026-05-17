@@ -8,7 +8,9 @@ $user = new Utilisateur();
 $user->nom = $_POST['nom'];
 $user->prenom = $_POST['prenom'];
 $user->email = $_POST['email'];
-$user->motDePasse = $_POST['motDePasse'];
+$user->motDePasse = password_hash($_POST['motDePasse'], PASSWORD_BCRYPT);
+$user->telephone = $_POST['telephone'];
+
 
 if ($user->inscrire($pdo)) {
     echo "Inscription réussie";
