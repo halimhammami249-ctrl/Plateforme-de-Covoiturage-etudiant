@@ -12,9 +12,11 @@ $sql = "SELECT
             Reservation.nombrePlaces,
             Reservation.statut,
 
-            Trajet.*,
+            Utilisateurs.nom,
+            Utilisateurs.prenom,
 
-            Utilisateurs.nom
+            Trajet.lieuDepart,
+            Trajet.destination
 
         FROM Reservation
 
@@ -22,20 +24,19 @@ $sql = "SELECT
         ON Reservation.idTrajet = Trajet.id
 
         INNER JOIN Utilisateurs
-        ON Trajet.idUtilisateur = Utilisateurs.id
+        ON Reservation.idUtilisateur = Utilisateurs.id
 
-        WHERE Reservation.idUtilisateur = ?
-
-        AND Reservation.statut = 'Acceptée'";
+        WHERE Trajet.idUtilisateur = ?
+        AND Reservation.statut = 'En attente'";
 
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([$userId]);
 
-$trajets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$requests = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 header('Content-Type: application/json');
 
-echo json_encode($trajets);
+echo json_encode($requests);
 
 ?>

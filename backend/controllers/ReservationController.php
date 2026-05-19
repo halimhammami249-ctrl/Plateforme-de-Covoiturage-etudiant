@@ -16,7 +16,7 @@ $reservation->idTrajet =
 $reservation->nombrePlaces =
     $_POST['nombrePlaces'];
 
-$reservation->statut = "Confirmée";
+$reservation->statut = "En attente";
 
 if ($reservation->reserver($pdo)) {
 
