@@ -2,24 +2,36 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Chat</title>
+
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/chat.css" />
   </head>
 
   <body>
-    <h1>Messagerie</h1>
+    <div id="navbar"></div>
 
-    <div id="messages"></div>
+    <main class="chat-page">
+      <div id="chat-box" class="chat-box"></div>
 
-    <form
-      action="../../backend/controllers/MessageController.php"
-      method="POST"
-    >
-      <input type="hidden" name="expediteur_id" value="1" />
-      <input type="hidden" name="recepteur_id" value="2" />
+      <form id="message-form">
+        <input
+          type="text"
+          id="message-input"
+          placeholder="Écrire un message..."
+          required
+        />
 
-      <input type="text" name="contenu" placeholder="Votre message" />
+        <button type="submit">Envoyer</button>
+      </form>
+    </main>
 
-      <button type="submit">Envoyer</button>
-    </form>
+    <div id="footer"></div>
+
+    <script src="../js/components.js"></script>
+    <script src="../js/chat.js"></script>
   </body>
 </html>
