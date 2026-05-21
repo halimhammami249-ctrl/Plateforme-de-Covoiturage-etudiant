@@ -2,14 +2,11 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Profil</title>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
       rel="stylesheet"
@@ -31,12 +28,11 @@
       <!-- PROFILE HEADER -->
       <section class="profile-header">
         <div class="profile-avatar">
-          <span id="avatar-letter"> U </span>
+          <span id="avatar-letter">U</span>
         </div>
 
         <div class="profile-info">
           <h1 id="name">Chargement...</h1>
-
           <p id="email">Chargement...</p>
         </div>
       </section>
@@ -47,26 +43,22 @@
 
         <div class="info-grid">
           <div class="info-item">
-            <label> Nom </label>
-
+            <label>Nom</label>
             <p id="nom-info">-</p>
           </div>
 
           <div class="info-item">
-            <label> Prénom </label>
-
+            <label>Prénom</label>
             <p id="prenom-info">-</p>
           </div>
 
           <div class="info-item">
-            <label> Téléphone </label>
-
+            <label>Téléphone</label>
             <p id="telephone-info">-</p>
           </div>
 
           <div class="info-item">
-            <label> Email </label>
-
+            <label>Email</label>
             <p id="email-info">-</p>
           </div>
         </div>
@@ -76,19 +68,16 @@
       <section class="stats">
         <div class="stat">
           <h3>Trajets proposés</h3>
-
           <p id="published-count">0</p>
         </div>
 
         <div class="stat">
           <h3>Trajets rejoints</h3>
-
           <p id="joined-count">0</p>
         </div>
 
         <div class="stat">
           <h3>Messages</h3>
-
           <p id="messages-count">0</p>
         </div>
       </section>
@@ -96,14 +85,10 @@
       <!-- CAPABILITIES -->
       <section class="profile-card">
         <h2>Fonctionnalités</h2>
-
         <ul class="capabilities">
           <li>✔ Publier des trajets</li>
-
           <li>✔ Rejoindre des trajets</li>
-
           <li>✔ Envoyer des messages</li>
-
           <li>✔ Gérer des demandes</li>
         </ul>
       </section>
@@ -112,13 +97,23 @@
       <section class="profile-card">
         <h2>Modifier le profil</h2>
 
-        <form id="profile-form">
-          <input type="text" id="newName" placeholder="Nouveau nom" />
+        <!-- message area (NEW) -->
+        <div id="profile-message"></div>
 
-          <input type="text" id="newPrenom" placeholder="Nouveau prénom" />
-
-          <input type="email" id="newEmail" placeholder="Nouvel email" />
-
+        <form id="profile-form" novalidate>
+          <input type="text" id="newName" placeholder="Nouveau nom" required />
+          <input
+            type="text"
+            id="newPrenom"
+            placeholder="Nouveau prénom"
+            required
+          />
+          <input
+            type="email"
+            id="newEmail"
+            placeholder="Nouvel email"
+            required
+          />
           <input type="text" id="newPhone" placeholder="Nouveau téléphone" />
 
           <button type="submit">Sauvegarder</button>
@@ -131,7 +126,7 @@
     <!-- JS -->
     <script src="../js/ui-enhancements.js"></script>
     <script src="../js/components.js"></script>
-    <script src="../js/profile.js"></script>
+    <script src="../js/UPDATE profile.js"></script>
     <script src="../js/notifications.js"></script>
   </body>
 </html>
