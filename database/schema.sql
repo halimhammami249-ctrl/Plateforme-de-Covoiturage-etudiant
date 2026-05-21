@@ -21,12 +21,9 @@ CREATE TABLE Utilisateurs (
 -- Table : Administrateur
 -- =========================
 CREATE TABLE Administrateur (
-    id_admin INT AUTO_INCREMENT PRIMARY KEY,
-    utilisateur_id INT UNIQUE,
-    
-    FOREIGN KEY (utilisateur_id)
-    REFERENCES Utilisateurs(id)
-    ON DELETE CASCADE
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(150) NOT NULL UNIQUE,
+    mot_de_passe VARCHAR(255) NOT NULL
 );
 
 -- =========================
