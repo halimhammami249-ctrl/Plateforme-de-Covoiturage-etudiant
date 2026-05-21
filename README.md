@@ -122,3 +122,8 @@ models/
 
 ALTER TABLE Message
 ADD vu TINYINT(1) DEFAULT 0;
+
+## data base typing
+
+ALTER TABLE Utilisateurs
+ADD isTyping TINYINT(1) DEFAULT 0;
