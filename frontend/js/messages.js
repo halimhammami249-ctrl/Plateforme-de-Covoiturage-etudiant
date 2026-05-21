@@ -1,35 +1,100 @@
-async function loadUsers() {
-  const response = await fetch(
-    '../../backend/controllers/GetUsersController.php',
-  );
+async function loadConversations() {
+  const usersList = document.getElementById('users-list');
 
-  const users = await response.json();
+  try {
+    const response = await fetch(
+      '../../backend/controllers/GetConversationsController.php',
+    );
 
-  const container = document.getElementById('users-list');
+    const users = await response.json();
 
-  container.innerHTML = '';
+    usersList.innerHTML = '';
 
-  users.forEach((user) => {
-    container.innerHTML += `
+    // EMPTY STATE
+    if (users.length === 0) {
+      usersList.innerHTML = `
 
-            <a
-                href="chat.html?id=${user.id}"
-                class="user-card"
-            >
+        <div class="empty-state">
 
-                <h3>
-                    ${user.nom}
-                    ${user.prenom}
-                </h3>
+          <h2>
+            Aucune conversation
+          </h2>
 
-                <p>
-                    ${user.email}
-                </p>
+          <p>
+            Vos conversations
+            apparaîtront ici.
+          </p>
 
-            </a>
+        </div>
 
-        `;
-  });
+      `;
+
+      return;
+    }
+
+    users.forEach((user) => {
+      usersList.innerHTML += `
+
+        <a
+          href="chat.html?id=${user.id}"
+          class="conversation-card"
+        >
+
+          <div class="conversation-info">
+
+            <h2>
+              ${user.nom}
+              ${user.prenom}
+            </h2>
+
+            <p class="last-message">
+
+              ${user.lastMessage || 'Commencer la conversation'}
+
+            </p>
+
+          </div>
+
+          <div class="conversation-meta">
+
+            ${
+              user.unreadCount > 0
+                ? `
+
+              <span class="unread-badge">
+                ${user.unreadCount}
+              </span>
+
+              `
+                : ''
+            }
+
+          </div>
+
+        </a>
+
+      `;
+    });
+  } catch (error) {
+    usersList.innerHTML = `
+
+      <div class="error-state">
+
+        <h2>
+          Erreur
+        </h2>
+
+        <p>
+          Impossible de charger
+          les conversations.
+        </p>
+
+      </div>
+
+    `;
+
+    console.error(error);
+  }
 }
 
-loadUsers();
+loadConversations();

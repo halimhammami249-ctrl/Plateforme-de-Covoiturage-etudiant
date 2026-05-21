@@ -1,89 +1,166 @@
 async function loadRequests() {
-  const response = await fetch(
-    '../../backend/controllers/GetRequestsController.php',
-  );
-
-  const requests = await response.json();
-
   const container = document.getElementById('requests-container');
 
-  container.innerHTML = '';
+  try {
+    const response = await fetch(
+      '../../backend/controllers/GetRequestsController.php',
+    );
 
-  if (requests.length === 0) {
-    container.innerHTML = '<p>Aucune demande en attente.</p>';
+    const requests = await response.json();
 
-    return;
-  }
+    container.innerHTML = '';
 
-  requests.forEach((request) => {
-    container.innerHTML += `
+    // EMPTY STATE
+    if (requests.length === 0) {
+      container.innerHTML = `
 
-            <div class="request-card">
+        <div class="empty-state">
 
-                <h3>
-                    ${request.nom}
-                    ${request.prenom}
-                </h3>
+          <h2>
+            Aucune demande
+          </h2>
 
-                <p>
-                    Trajet:
-                    ${request.lieuDepart}
-                    →
-                    ${request.destination}
-                </p>
+          <p>
+            Vous n'avez reçu
+            aucune demande
+            pour le moment.
+          </p>
 
-                <p>
-                    Places demandées:
-                    ${request.nombrePlaces}
-                </p>
+        </div>
 
-                <p>
-                    Statut:
-                    ${request.statut}
-                </p>
+      `;
 
-                <div class="buttons">
+      return;
+    }
 
-                    <form
-                        action="../../backend/controllers/AcceptReservationController.php"
-                        method="POST"
-                    >
+    requests.forEach((request) => {
+      let statusClass = '';
 
-                        <input
-                            type="hidden"
-                            name="id"
-                            value="${request.reservationId}"
-                        >
+      if (request.statut === 'Acceptée') {
+        statusClass = 'accepted';
+      } else if (request.statut === 'Refusée') {
+        statusClass = 'refused';
+      } else {
+        statusClass = 'pending';
+      }
 
-                        <button type="submit">
-                            Accepter
-                        </button>
+      container.innerHTML += `
 
-                    </form>
+        <div class="request-card">
 
-                    <form
-                        action="../../backend/controllers/RefuseReservationController.php"
-                        method="POST"
-                    >
+          <div class="request-header">
 
-                        <input
-                            type="hidden"
-                            name="id"
-                            value="${request.reservationId}"
-                        >
+            <h2>
+              ${request.nom}
+              ${request.prenom}
+            </h2>
 
-                        <button type="submit">
-                            Refuser
-                        </button>
+            <span class="
+              status
+              ${statusClass}
+            ">
+              ${request.statut}
+            </span>
 
-                    </form>
+          </div>
 
-                </div>
+          <div class="request-body">
+
+            <p>
+              <strong>Trajet :</strong>
+              ${request.lieuDepart}
+              →
+              ${request.destination}
+            </p>
+
+            <p>
+              <strong>Places :</strong>
+              ${request.nombrePlaces}
+            </p>
+
+            <p>
+              <strong>Date :</strong>
+              ${request.dateReservation}
+            </p>
+
+          </div>
+
+          ${
+            request.statut === 'En attente'
+              ? `
+
+            <div class="request-actions">
+
+              <form
+                action="../../backend/controllers/AcceptReservationController.php"
+                method="POST"
+              >
+
+                <input
+                  type="hidden"
+                  name="id"
+                  value="${request.id}"
+                />
+
+                <button
+                  class="accept-btn"
+                  type="submit"
+                >
+                  Accepter
+                </button>
+
+              </form>
+
+              <form
+                action="../../backend/controllers/RefuseReservationController.php"
+                method="POST"
+              >
+
+                <input
+                  type="hidden"
+                  name="id"
+                  value="${request.id}"
+                />
+
+                <button
+                  class="refuse-btn"
+                  type="submit"
+                >
+                  Refuser
+                </button>
+
+              </form>
 
             </div>
 
-        `;
-  });
+            `
+              : ''
+          }
+
+        </div>
+
+      `;
+    });
+  } catch (error) {
+    container.innerHTML = `
+
+      <div class="error-state">
+
+        <h2>
+          Erreur
+        </h2>
+
+        <p>
+          Impossible de charger
+          les demandes.
+        </p>
+
+      </div>
+
+    `;
+
+    console.error(error);
+  }
 }
 
 loadRequests();

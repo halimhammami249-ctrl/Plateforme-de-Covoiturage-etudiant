@@ -20,7 +20,18 @@ $reservation->statut = "En attente";
 
 if ($reservation->reserver($pdo)) {
 
-    echo "Réservation effectuée";
+    echo "
+
+<script>
+
+alert('Demande envoyée avec succès !');
+
+window.location.href =
+'../../frontend/pages/my-trips.html';
+
+</script>
+
+";
 
 } else {
 
