@@ -1,0 +1,23 @@
+/* admin-theme.css — Variables thème admin */
+
+:root {
+  --admin-bg: #07060d;
+  --admin-surface: #12101c;
+  --admin-surface-2: #1a1728;
+  --admin-surface-3: #221f33;
+  --admin-border: rgba(148, 163, 184, 0.12);
+  --admin-text: #f1f5f9;
+  --admin-muted: #94a3b8;
+  --admin-accent: #14b8a6;
+  --admin-accent-2: #2dd4bf;
+  --admin-violet: #8b5cf6;
+  --admin-amber: #f59e0b;
+  --admin-danger: #f43f5e;
+  --admin-success: #22c55e;
+  --admin-gradient: linear-gradient(135deg, #14b8a6 0%, #6366f1 50%, #8b5cf6 100%);
+  --admin-sidebar-w: 260px;
+  --admin-radius: 14px;
+  --admin-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --admin-font: "DM Sans", system-ui, sans-serif;
+  --admin-display: "Syne", system-ui, sans-serif;
+}

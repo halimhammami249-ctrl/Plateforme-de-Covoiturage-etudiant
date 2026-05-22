@@ -1,0 +1,191 @@
+/* animations.css — Micro-interactions & entrées (fichier additionnel) */
+
+/* Entrée page */
+body.app-modern main,
+body.app-modern .dashboard,
+body.app-modern .auth-container,
+body.app-modern .search-container,
+body.app-modern .publish-container,
+body.app-modern .profile-container,
+body.app-modern .my-trips {
+  animation: pageIn 0.55s var(--ease-smooth, ease) both;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cartes — apparition décalée */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.55s var(--ease-smooth, ease),
+    transform 0.55s var(--ease-smooth, ease);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-on-scroll:nth-child(2) {
+  transition-delay: 0.08s;
+}
+.reveal-on-scroll:nth-child(3) {
+  transition-delay: 0.14s;
+}
+.reveal-on-scroll:nth-child(4) {
+  transition-delay: 0.2s;
+}
+
+/* Navbar */
+.navbar {
+  animation: navSlide 0.45s var(--ease-smooth, ease) both;
+}
+
+@keyframes navSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Liens nav — soulignement animé */
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 4px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease-smooth, ease);
+}
+
+.nav-links a:hover::after,
+.nav-links a.nav-active::after {
+  transform: scaleX(1);
+}
+
+.nav-links a.nav-active {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Boutons — ripple léger au clic */
+button,
+.card a,
+.join-btn,
+.filters button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after,
+.card a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.35),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+button:active::after,
+.card a:active::after {
+  opacity: 1;
+}
+
+/* Trip cards — hover lift */
+.trip-card {
+  transition:
+    transform 0.3s var(--ease-spring, ease),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease !important;
+}
+
+.trip-card:hover {
+  transform: translateY(-4px) !important;
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 40%, #e2e8f0 80%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+  border-radius: 12px;
+  color: transparent !important;
+  user-select: none;
+  min-height: 1.2em;
+}
+
+.skeleton-block {
+  height: 14px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.skeleton-title {
+  height: 28px;
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Footer fade-in */
+.footer {
+  animation: footerIn 0.6s ease 0.2s both;
+}
+
+@keyframes footerIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

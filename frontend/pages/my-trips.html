@@ -5,8 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mes trajets</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/my-trips.css" />
+    <link rel="stylesheet" href="../css/modern.css" />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+    <link rel="stylesheet" href="../css/components-ui.css" />
   </head>
 
   <body>
@@ -15,33 +25,26 @@
     <main class="my-trips">
       <h1>Mes trajets</h1>
 
-      <!-- CREATED TRIPS -->
+      <!-- TRAJETS PUBLIÉS -->
       <section>
         <h2>Trajets publiés</h2>
 
-        <div class="trip-list">
-          <div class="trip-card">
-            <p>Tunis → Ariana</p>
-            <p>2 places restantes</p>
-          </div>
-        </div>
+        <div id="created-trips" class="trip-list"></div>
       </section>
 
-      <!-- JOINED TRIPS -->
+      <!-- TRAJETS REJOINTS -->
       <section>
         <h2>Trajets rejoints</h2>
 
-        <div class="trip-list">
-          <div class="trip-card">
-            <p>Sfax → Tunis</p>
-            <p>Conducteur: Ali</p>
-          </div>
-        </div>
+        <div id="joined-trips" class="trip-list"></div>
       </section>
     </main>
 
     <div id="footer"></div>
 
+    <script src="../js/ui-enhancements.js"></script>
     <script src="../js/components.js"></script>
+    <script src="../js/my-trips.js"></script>
+    <script src="../js/auth.js"></script>
   </body>
 </html>

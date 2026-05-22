@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inscription - Covoiturage Étudiant</title>
 
+    <!-- Ajout Google Fonts pour le design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/auth.css" />
+    <link rel="stylesheet" href="../css/modern.css" />
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+    <link rel="stylesheet" href="../css/components-ui.css" />
   </head>
   <body>
     <div id="navbar"></div>
@@ -33,6 +44,14 @@
           <div class="input-group">
             <label>Email</label>
             <input type="email" name="email" placeholder="Entrer votre email" />
+          </div>
+          <div class="input-group">
+            <label>Confirmer l'email</label>
+            <input
+              type="email"
+              name="confirmEmail"
+              placeholder="Confirmer votre email"
+            />
           </div>
 
           <div class="input-group">
@@ -67,8 +86,7 @@
       </div>
     </div>
 
-    <div id="footer"></div>
-
+    <script src="../js/ui-enhancements.js"></script>
     <script src="../js/components.js"></script>
   </body>
 </html>

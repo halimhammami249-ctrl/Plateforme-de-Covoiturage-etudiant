@@ -43,7 +43,6 @@ let animFrame = null;
 let pointIdx = 0;
 let paused = false;
 
-// Fetch route from OSRM (free, no key needed)
 async function fetchRoute() {
   const coords = STOPS.map(s => `${s.latlng[1]},${s.latlng[0]}`).join(';');
   const url = `https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`;
