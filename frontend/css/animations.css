@@ -68,13 +68,13 @@ body.app-modern .my-trips {
 }
 
 .nav-links a::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 14px;
   right: 14px;
   bottom: 4px;
   height: 2px;
-  background: #fff;
+  background: #ffffff;
   border-radius: 2px;
   transform: scaleX(0);
   transform-origin: left;
@@ -101,10 +101,14 @@ button,
 
 button::after,
 .card a::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 255, 255, 0.35), transparent 55%);
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.35),
+    transparent 55%
+  );
   opacity: 0;
   transition: opacity 0.4s;
   pointer-events: none;
@@ -129,12 +133,7 @@ button:active::after,
 
 /* Skeleton loading */
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    #e2e8f0 0%,
-    #f1f5f9 40%,
-    #e2e8f0 80%
-  );
+  background: linear-gradient(90deg, #e2e8f0 0%, #f1f5f9 40%, #e2e8f0 80%);
   background-size: 200% 100%;
   animation: shimmer 1.2s ease-in-out infinite;
   border-radius: 12px;

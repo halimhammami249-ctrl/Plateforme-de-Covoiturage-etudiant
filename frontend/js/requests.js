@@ -34,6 +34,7 @@ async function loadRequests() {
     }
 
     requests.forEach((request) => {
+      console.log('REQUEST OBJECT:', request);
       let statusClass = '';
 
       if (request.statut === 'Acceptée') {
@@ -97,11 +98,10 @@ async function loadRequests() {
               >
 
                 <input
-                  type="hidden"
-                  name="id"
-                  value="${request.id}"
-                />
-
+  type="hidden"
+  name="id"
+value="${request.reservationId}"
+/>
                 <button
                   class="accept-btn"
                   type="submit"
@@ -119,7 +119,7 @@ async function loadRequests() {
                 <input
                   type="hidden"
                   name="id"
-                  value="${request.id}"
+                value="${request.reservationId}"
                 />
 
                 <button

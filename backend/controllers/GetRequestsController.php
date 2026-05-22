@@ -11,6 +11,7 @@ $sql = "SELECT
             Reservation.id AS reservationId,
             Reservation.nombrePlaces,
             Reservation.statut,
+                Reservation.dateReservation,
 
             Utilisateurs.nom,
             Utilisateurs.prenom,
