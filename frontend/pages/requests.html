@@ -5,7 +5,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Chat</title>
+    <title>Demandes de réservation</title>
 
     <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,7 +17,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/chat.css" />
+    <link rel="stylesheet" href="../css/requests.css" />
     <link rel="stylesheet" href="../css/modern.css" />
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/animations.css" />
@@ -27,35 +27,22 @@
   <body>
     <div id="navbar"></div>
 
-    <main class="chat-page">
-      <!-- CHAT HEADER -->
-      <div class="chat-header">
-        <div class="chat-user-info">
-          <h2>Conversation</h2>
+    <main class="requests-page">
+      <div class="page-header">
+        <h1>Demandes de réservation</h1>
 
-          <p id="typing-indicator"></p>
-        </div>
+        <p>Gérez les demandes envoyées pour vos trajets.</p>
       </div>
 
-      <!-- CHAT BOX -->
-      <div id="chat-box" class="chat-box">
-        <div class="loading-state">
-          <p>Chargement des messages...</p>
+      <!-- REQUESTS -->
+      <section class="requests-section">
+        <div id="requests-container" class="requests-container">
+          <!-- LOADING -->
+          <div class="loading-state">
+            <p>Chargement des demandes...</p>
+          </div>
         </div>
-      </div>
-
-      <!-- MESSAGE FORM -->
-      <form id="message-form" class="message-form">
-        <input
-          type="text"
-          id="message-input"
-          placeholder="Écrire un message..."
-          autocomplete="off"
-          required
-        />
-
-        <button type="submit">Envoyer</button>
-      </form>
+      </section>
     </main>
 
     <div id="footer"></div>
@@ -63,6 +50,6 @@
     <!-- JS -->
     <script src="../js/ui-enhancements.js"></script>
     <script src="../js/components.js"></script>
-    <script src="../js/chat.js"></script>
+    <script src="../js/requests.js"></script>
   </body>
 </html>

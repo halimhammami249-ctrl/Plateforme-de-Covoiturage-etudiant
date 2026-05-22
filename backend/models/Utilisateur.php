@@ -33,51 +33,58 @@ class Utilisateur {
     ]);
 }
 
-   public function connecter($pdo) {
+       public function connecter($pdo) {
 
-    session_start();
+        session_start();
 
-    $sql = "SELECT * FROM Utilisateurs WHERE email = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$this->email]);
+        $sql = "SELECT * FROM Utilisateurs
+                WHERE email = ?";
 
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt = $pdo->prepare($sql);
 
-    if (!$user) {
-        return "Email incorrect";
+        $stmt->execute([$this->email]);
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user) {
+            return "Email incorrect";
+        }
+
+        if (!password_verify($this->motDePasse, $user['motDePasse'])) {
+            return "Mot de passe incorrect";
+        }
+
+        $_SESSION['user'] = [
+            'id' => $user['id'],
+            'nom' => $user['nom'],
+            'prenom' => $user['prenom'],
+            'email' => $user['email']
+        ];
+
+        $update = "UPDATE Utilisateurs
+                   SET dateSession = ?
+                   WHERE id = ?";
+
+        $stmt = $pdo->prepare($update);
+
+        $stmt->execute([
+            date('Y-m-d H:i:s'),
+            $user['id']
+        ]);
+
+        return "Connexion réussie";
     }
 
-    if (!password_verify($this->motDePasse, $user['motDePasse'])) {
-        return "Mot de passe incorrect";
+    // DECONNEXION
+    public function deconnecter() {
+
+        session_start();
+
+        session_unset();
+        session_destroy();
+
+        return "Utilisateur déconnecté";
     }
-
-    // Store session data
-    $_SESSION['user'] = [
-        'id' => $user['id'],
-        'nom' => $user['nom'],
-        'prenom' => $user['prenom'],
-        'email' => $user['email']
-    ];
-
-    // Optional: update dateSession
-    $update = "UPDATE Utilisateurs SET dateSession = ? WHERE id = ?";
-    $stmt = $pdo->prepare($update);
-    $stmt->execute([date('Y-m-d H:i:s'), $user['id']]);
-
-    return "Connexion réussie";
-}
-
-
-
- public function deconnecter() {
-
-    session_start();
-
-    session_unset();
-    session_destroy();
-
-    return "Déconnexion réussie";
-}
 
     public function modifierProfil() {
         echo "Profil modifié";
