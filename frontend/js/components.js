@@ -1,34 +1,40 @@
-// Load Navbar
 fetch('../components/navbar.html?v=' + Date.now())
   .then((res) => res.text())
   .then((data) => {
     document.getElementById('navbar').innerHTML = data;
 
-    // LOAD NOTIFICATIONS AFTER NAVBAR EXISTS
+    // LOAD NOTIFICATIONS
     const script = document.createElement('script');
-
     script.src = '../js/notifications.js?v=' + Date.now();
-
     document.body.appendChild(script);
-  });
 
-// Load Footer
-fetch('../components/footer.html?v=' + Date.now())
-  .then((res) => res.text())
-  .then((data) => {
-    document.getElementById('footer').innerHTML = data;
-  });
+    // ✅ ADD LOGOUT HERE (IMPORTANT FIX)
+    const logoutBtn = document.getElementById('logout');
 
-confirmEmailInput = document.querySelector('input[name="confirmEmail"]');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async function (e) {
+        e.preventDefault();
 
-if (confirmEmailInput) {
-  confirmEmailInput.addEventListener('input', function () {
-    const emailInput = document.querySelector('input[name="email"]');
+        try {
+          const response = await fetch(
+            '../../backend/controllers/LogoutController.php',
+            {
+              method: 'POST',
+              credentials: 'include',
+            },
+          );
 
-    if (emailInput.value !== this.value) {
-      this.setCustomValidity('Les emails ne correspondent pas.');
-    } else {
-      this.setCustomValidity('');
+          const result = await response.text();
+
+          if (result === 'OK') {
+            window.location.href = 'login.html';
+          } else {
+            alert('Logout failed');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Error logging out');
+        }
+      });
     }
   });
-}
