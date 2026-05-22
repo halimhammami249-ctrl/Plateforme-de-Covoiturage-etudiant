@@ -8,7 +8,6 @@ fetch('../components/navbar.html?v=' + Date.now())
     script.src = '../js/notifications.js?v=' + Date.now();
     document.body.appendChild(script);
 
-    // ✅ ADD LOGOUT HERE (IMPORTANT FIX)
     const logoutBtn = document.getElementById('logout');
 
     if (logoutBtn) {
