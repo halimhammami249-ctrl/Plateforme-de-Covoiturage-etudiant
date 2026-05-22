@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profil</title>
 
-    <!-- Ajout Google Fonts pour le design -->
+    <!-- GOOGLE FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
 
+    <!-- CSS -->
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="../css/profile.css" />
     <link rel="stylesheet" href="../css/modern.css" />
@@ -23,53 +24,109 @@
   <body>
     <div id="navbar"></div>
 
-    <div class="profile-container">
-      <h1>Mon Profil</h1>
+    <main class="profile-container">
+      <!-- PROFILE HEADER -->
+      <section class="profile-header">
+        <div class="profile-avatar">
+          <span id="avatar-letter">U</span>
+        </div>
 
-      <!-- USER INFO -->
-      <div class="profile-card">
-        <h2 id="name">Nom</h2>
-        <p id="email">Email</p>
-      </div>
+        <div class="profile-info">
+          <h1 id="name">Chargement...</h1>
+          <p id="email">Chargement...</p>
+        </div>
+      </section>
 
-      <!-- CAPABILITIES -->
-      <div class="profile-card">
-        <h3>Capabilités</h3>
-        <ul>
-          <li>✔ Peut proposer des trajets</li>
-          <li>✔ Peut rejoindre des trajets</li>
-        </ul>
-      </div>
+      <!-- USER INFORMATIONS -->
+      <section class="profile-card">
+        <h2>Informations personnelles</h2>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <label>Nom</label>
+            <p id="nom-info">-</p>
+          </div>
+
+          <div class="info-item">
+            <label>Prénom</label>
+            <p id="prenom-info">-</p>
+          </div>
+
+          <div class="info-item">
+            <label>Téléphone</label>
+            <p id="telephone-info">-</p>
+          </div>
+
+          <div class="info-item">
+            <label>Email</label>
+            <p id="email-info">-</p>
+          </div>
+        </div>
+      </section>
 
       <!-- STATS -->
-      <div class="stats">
+      <section class="stats">
         <div class="stat">
           <h3>Trajets proposés</h3>
-          <p>0</p>
+          <p id="published-count">0</p>
         </div>
 
         <div class="stat">
           <h3>Trajets rejoints</h3>
-          <p>0</p>
+          <p id="joined-count">0</p>
         </div>
-      </div>
 
-      <!-- EDIT FORM (UI ONLY) -->
-      <div class="profile-card">
-        <h3>Modifier profil</h3>
+        <div class="stat">
+          <h3>Messages</h3>
+          <p id="messages-count">0</p>
+        </div>
+      </section>
 
-        <input type="text" id="newName" placeholder="Nouveau nom" />
-        <input type="email" id="newEmail" placeholder="Nouvel email" />
+      <!-- CAPABILITIES -->
+      <section class="profile-card">
+        <h2>Fonctionnalités</h2>
+        <ul class="capabilities">
+          <li>✔ Publier des trajets</li>
+          <li>✔ Rejoindre des trajets</li>
+          <li>✔ Envoyer des messages</li>
+          <li>✔ Gérer des demandes</li>
+        </ul>
+      </section>
 
-        <button onclick="updateProfile()">Sauvegarder</button>
-      </div>
-    </div>
+      <!-- EDIT PROFILE -->
+      <section class="profile-card">
+        <h2>Modifier le profil</h2>
+
+        <!-- message area (NEW) -->
+        <div id="profile-message"></div>
+
+        <form id="profile-form" novalidate>
+          <input type="text" id="newName" placeholder="Nouveau nom" required />
+          <input
+            type="text"
+            id="newPrenom"
+            placeholder="Nouveau prénom"
+            required
+          />
+          <input
+            type="email"
+            id="newEmail"
+            placeholder="Nouvel email"
+            required
+          />
+          <input type="text" id="newPhone" placeholder="Nouveau téléphone" />
+
+          <button type="submit">Sauvegarder</button>
+        </form>
+      </section>
+    </main>
 
     <div id="footer"></div>
 
+    <!-- JS -->
     <script src="../js/ui-enhancements.js"></script>
     <script src="../js/components.js"></script>
-    <script src="../js/profile.js"></script>
+    <script src="../js/UPDATE profile.js"></script>
     <script src="../js/notifications.js"></script>
   </body>
 </html>

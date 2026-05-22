@@ -25,7 +25,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($trajet->creerTrajet($pdo)) {
 
-        echo "Trajet créé avec succès";
+       echo "
+
+<script>
+
+alert('Trajet publié avec succès !');
+
+window.location.href =
+'../../frontend/pages/my-trips.html';
+
+</script>
+
+";
 
     } else {
 

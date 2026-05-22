@@ -13,7 +13,19 @@ $user->telephone = $_POST['telephone'];
 
 
 if ($user->inscrire($pdo)) {
-    echo "Inscription réussie";
+    echo "
+
+<script>
+
+alert('Inscription réussie !');
+
+window.location.href =
+'../../frontend/pages/login.html';
+
+</script>
+
+";
+exit;
 } else {
     echo "Erreur";
 }
