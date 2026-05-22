@@ -1,12 +1,9 @@
 /**
  * admin-dashboard.js — Dashboard administrateur
- * Données démo (localStorage) — prêt pour branchement API PHP
+ * Utilise uniquement les données backend via AdminController.php
  */
 
 const ADMIN_STORAGE = {
-  users: "admin_users",
-  trips: "admin_trips",
-  reports: "admin_signalements",
   session: "admin_session",
 };
 
@@ -30,121 +27,6 @@ const SECTION_META = {
 };
 
 /* ——— Données initiales ——— */
-const seedUsers = () => [
-  {
-    id: 1,
-    nom: "Ben Ali",
-    prenom: "Ahmed",
-    email: "ahmed@univ.tn",
-    telephone: "22123456",
-    dateInscription: "2025-09-12",
-  },
-  {
-    id: 2,
-    nom: "Trabelsi",
-    prenom: "Sami",
-    email: "sami@univ.tn",
-    telephone: "55887766",
-    dateInscription: "2025-10-03",
-  },
-  {
-    id: 3,
-    nom: "Mansour",
-    prenom: "Leila",
-    email: "leila@univ.tn",
-    telephone: "99887744",
-    dateInscription: "2026-01-15",
-  },
-  {
-    id: 4,
-    nom: "Gharbi",
-    prenom: "Karim",
-    email: "karim@univ.tn",
-    telephone: "22334455",
-    dateInscription: "2026-02-20",
-  },
-];
-
-const seedTrips = () => [
-  {
-    id: 1,
-    idUtilisateur: 1,
-    conducteur: "Ahmed Ben Ali",
-    lieuDepart: "Tunis",
-    destination: "Ariana",
-    dateHeure: "2026-05-18",
-    prixParPlace: 5,
-    nombrePlaces: 3,
-    placesDisponibles: 2,
-    statut: "actif",
-  },
-  {
-    id: 2,
-    idUtilisateur: 2,
-    conducteur: "Sami Trabelsi",
-    lieuDepart: "Sfax",
-    destination: "Tunis",
-    dateHeure: "2026-05-20",
-    prixParPlace: 12,
-    nombrePlaces: 4,
-    placesDisponibles: 0,
-    statut: "complet",
-  },
-  {
-    id: 3,
-    idUtilisateur: 3,
-    conducteur: "Leila Mansour",
-    lieuDepart: "Manouba",
-    destination: "ESPRIT",
-    dateHeure: "2026-05-22",
-    prixParPlace: 4,
-    nombrePlaces: 2,
-    placesDisponibles: 1,
-    statut: "actif",
-  },
-];
-
-const seedReports = () => [
-  {
-    id: 1,
-    idUtilisateur: 2,
-    utilisateur: "Sami Trabelsi",
-    motif: "Comportement inapproprié",
-    description: "Conducteur en retard de 40 minutes sans prévenir.",
-    dateSignalement: "2026-05-14",
-    statut: "en_attente",
-  },
-  {
-    id: 2,
-    idUtilisateur: 4,
-    utilisateur: "Karim Gharbi",
-    motif: "Annulation abusive",
-    description: "Trajet annulé 10 min avant le départ.",
-    dateSignalement: "2026-05-15",
-    statut: "en_attente",
-  },
-  {
-    id: 3,
-    idUtilisateur: 1,
-    utilisateur: "Ahmed Ben Ali",
-    motif: "Faux profil",
-    description: "Photo de profil ne correspond pas.",
-    dateSignalement: "2026-05-10",
-    statut: "traite",
-  },
-];
-
-/* ——— Storage ——— */
-const load = (key, seedFn) => {
-  const raw = localStorage.getItem(key);
-  if (raw) return JSON.parse(raw);
-  const data = seedFn();
-  localStorage.setItem(key, JSON.stringify(data));
-  return data;
-};
-
-const save = (key, data) => localStorage.setItem(key, JSON.stringify(data));
-
 let users = [];
 let trips = [];
 let reports = [];
@@ -153,48 +35,24 @@ let pendingConfirm = null;
 
 /* ——— Auth ——— */
 const DASHBOARD_URL = "admin-dashboard.html";
+const API_BASE = "../../backend/controllers/AdminController.php";
 
 const ensureAdminSession = () => {
-  const params = new URLSearchParams(window.location.search);
   const raw = localStorage.getItem(ADMIN_STORAGE.session);
 
   if (raw) {
     try {
       const session = JSON.parse(raw);
-      return { ok: true, session, demo: !!session.demo };
+      return { ok: true, session };
     } catch {
       localStorage.removeItem(ADMIN_STORAGE.session);
     }
-  }
-
-  if (params.get("demo") === "1") {
-    const demoSession = {
-      email: "demo@admin.tn",
-      name: "Admin Démo",
-      role: "administrateur",
-      demo: true,
-    };
-    localStorage.setItem(ADMIN_STORAGE.session, JSON.stringify(demoSession));
-    return { ok: true, session: demoSession, demo: true };
   }
 
   const page = window.location.pathname.split("/").pop() || DASHBOARD_URL;
   window.location.href =
     "admin-login.html?redirect=" + encodeURIComponent(page);
   return { ok: false };
-};
-
-const showDemoBanner = () => {
-  if (document.getElementById("adminDemoBanner")) return;
-
-  const banner = document.createElement("div");
-  banner.id = "adminDemoBanner";
-  banner.className = "admin-demo-banner";
-  banner.innerHTML = `
-    <span>Mode démo — connectez-vous pour un accès administrateur complet</span>
-    <a href="admin-login.html?logout=1">Page de connexion admin</a>
-  `;
-  document.querySelector(".admin-main")?.prepend(banner);
 };
 
 /* ——— UI helpers ——— */
@@ -421,25 +279,21 @@ const refreshAll = () => {
 };
 
 /* ——— Actions CRUD ——— */
-const deleteUser = (id) => {
+let deleteUser = (id) => {
   users = users.filter((u) => u.id !== id);
   trips = trips.filter((t) => t.idUtilisateur !== id);
-  save(ADMIN_STORAGE.users, users);
-  save(ADMIN_STORAGE.trips, trips);
   showToast("Utilisateur supprimé");
   refreshAll();
 };
 
-const deleteTrip = (id) => {
+let deleteTrip = (id) => {
   trips = trips.filter((t) => t.id !== id);
-  save(ADMIN_STORAGE.trips, trips);
   showToast("Trajet supprimé");
   refreshAll();
 };
 
-const updateReportStatus = (id, statut) => {
+let updateReportStatus = (id, statut) => {
   reports = reports.map((r) => (r.id === id ? { ...r, statut } : r));
-  save(ADMIN_STORAGE.reports, reports);
   showToast(
     statut === "traite" ? "Signalement traité" : "Signalement rejeté",
     "success"
@@ -447,9 +301,8 @@ const updateReportStatus = (id, statut) => {
   refreshAll();
 };
 
-const deleteReport = (id) => {
+let deleteReport = (id) => {
   reports = reports.filter((r) => r.id !== id);
-  save(ADMIN_STORAGE.reports, reports);
   showToast("Signalement supprimé");
   refreshAll();
 };
@@ -563,12 +416,6 @@ const init = () => {
   const auth = ensureAdminSession();
   if (!auth.ok) return;
 
-  if (auth.demo) showDemoBanner();
-
-  users = load(ADMIN_STORAGE.users, seedUsers);
-  trips = load(ADMIN_STORAGE.trips, seedTrips);
-  reports = load(ADMIN_STORAGE.reports, seedReports);
-
   const session = auth.session || {};
   if (session.name) {
     const initials = session.name
@@ -581,8 +428,105 @@ const init = () => {
     if (av) av.textContent = initials;
   }
 
-  bindEvents();
-  loadSidebar().then(refreshAll);
+  const apiGet = (action) =>
+    fetch(`${API_BASE}?action=${encodeURIComponent(action)}`, {
+      credentials: "same-origin",
+      headers: { Accept: "application/json" },
+    }).then((r) => r.json());
+
+  const apiPost = (action, data) => {
+    const body = new URLSearchParams({ action, ...data });
+    return fetch(API_BASE, {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
+      body: body.toString(),
+    }).then((r) => r.json());
+  };
+
+  Promise.all([apiGet("stats"), apiGet("users"), apiGet("trips"), apiGet("reports")])
+    .then(([statsRes, usersRes, tripsRes, reportsRes]) => {
+      if (statsRes && statsRes.success && statsRes.data) {
+        const s = statsRes.data;
+        $("#statUsers").textContent = s.utilisateurs ?? 0;
+        $("#statTrips").textContent = s.trajets ?? 0;
+        $("#statReports").textContent = s.signalements_en_attente ?? 0;
+        $("#statReservations").textContent = s.reservations ?? 0;
+      }
+
+      users = usersRes && usersRes.success ? usersRes.data : [];
+      trips = tripsRes && tripsRes.success ? tripsRes.data : [];
+      reports = reportsRes && reportsRes.success ? reportsRes.data : [];
+
+      deleteUser = (id) => {
+        apiPost("delete_user", { id })
+          .then((res) => {
+            if (res && res.success) {
+              users = users.filter((u) => u.id !== id);
+              trips = trips.filter((t) => t.idUtilisateur !== id);
+              showToast("Utilisateur supprimé");
+              refreshAll();
+            } else {
+              showToast("Erreur suppression utilisateur", "error");
+            }
+          })
+          .catch(() => showToast("Erreur réseau", "error"));
+      };
+
+      deleteTrip = (id) => {
+        apiPost("delete_trip", { id })
+          .then((res) => {
+            if (res && res.success) {
+              trips = trips.filter((t) => t.id !== id);
+              showToast("Trajet supprimé");
+              refreshAll();
+            } else {
+              showToast("Erreur suppression trajet", "error");
+            }
+          })
+          .catch(() => showToast("Erreur réseau", "error"));
+      };
+
+      updateReportStatus = (id, statut) => {
+        apiPost("update_report", { id, statut })
+          .then((res) => {
+            if (res && res.success) {
+              reports = reports.map((r) => (r.id === id ? { ...r, statut } : r));
+              showToast(statut === "traite" ? "Signalement traité" : "Signalement rejeté", "success");
+              refreshAll();
+            } else {
+              showToast("Erreur mise à jour signalement", "error");
+            }
+          })
+          .catch(() => showToast("Erreur réseau", "error"));
+      };
+
+      deleteReport = (id) => {
+        apiPost("delete_report", { id })
+          .then((res) => {
+            if (res && res.success) {
+              reports = reports.filter((r) => r.id !== id);
+              showToast("Signalement supprimé");
+              refreshAll();
+            } else {
+              showToast("Erreur suppression signalement", "error");
+            }
+          })
+          .catch(() => showToast("Erreur réseau", "error"));
+      };
+
+      bindEvents();
+      loadSidebar().then(refreshAll);
+    })
+    .catch((err) => {
+      console.error("Erreur chargement admin data:", err);
+      showToast("Impossible de charger les données administrateur", "error");
+      users = [];
+      trips = [];
+      reports = [];
+      bindEvents();
+      loadSidebar().then(refreshAll);
+    });
 };
 
 document.addEventListener("DOMContentLoaded", init);
